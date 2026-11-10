@@ -207,6 +207,12 @@ function main() {
         }
     } else if (ref.startsWith('refs/heads/')) {
         const br = ref.slice('refs/heads/'.length);
+        // Pas de nouveau commit dans ce push : pas de réponse (on ne commente que les commits de l'élève)
+        const vide = !avant || /^0+$/.test(avant);
+        if (!git('log', '--format=%H', vide ? `origin/develop..origin/${br}` : `${avant}..origin/${br}`)) {
+            fs.writeFileSync(process.env.SORTIE || 'resultat.json', JSON.stringify(res));
+            return;
+        }
         if (br !== `feature/${pseudo}` && br !== `hotfix/${pseudo}`) {
             corriger.push(`La branche \`${br}\` ne correspond à aucune mission. Noms attendus : \`feature/${pseudo}\` ou \`hotfix/${pseudo}\`.`);
         }

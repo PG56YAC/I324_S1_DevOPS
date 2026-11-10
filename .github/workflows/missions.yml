@@ -45,6 +45,10 @@ jobs:
           if [ -n "$TAG" ]; then
             gh api -X DELETE "repos/$REPO/git/refs/tags/$TAG" || true
           fi
-          node -e "const r=require(process.env.RES);require('fs').writeFileSync('corps.json',JSON.stringify({body:r.commentaire}))"
-          gh api -X POST "repos/$REPO/commits/$SHA/comments" --input corps.json > /dev/null
-          echo "Réponse envoyée en commentaire sur le commit." >> "$GITHUB_STEP_SUMMARY"
+          node -e "const r=require(process.env.RES);if(r.commentaire)require('fs').writeFileSync('corps.json',JSON.stringify({body:r.commentaire}))"
+          if [ -f corps.json ]; then
+            gh api -X POST "repos/$REPO/commits/$SHA/comments" --input corps.json > /dev/null
+            echo "Réponse envoyée en commentaire sur le commit." >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "Aucun nouveau commit dans ce push : pas de réponse." >> "$GITHUB_STEP_SUMMARY"
+          fi
