@@ -22,16 +22,17 @@ Dans tout le parcours, `<pseudo>` = votre nom d'utilisateur GitHub **en minuscul
 
 ## Mission 1
 
-Créez la branche `feature/<pseudo>` **à partir de `develop`**, puis poussez-la.
+Créez la branche `feature/<pseudo>` **à partir de `develop`**, puis faites-y un premier commit.
 
 Dans VS Code :
 
 1. En bas à gauche, cliquez sur le nom de la branche › **Create new branch from…** › choisissez `origin/develop`.
 2. Nommez la branche `feature/<pseudo>`.
-3. Onglet **Source Control** (`Ctrl+Shift+G`) › **Publish Branch**.
+3. Dans le dossier `missions`, créez le fichier `<pseudo>.md` avec une ligne de texte.
+4. Onglet **Source Control** (`Ctrl+Shift+G`) : message `feat: ajoute ma fiche de mission`, **Commit**, puis **Publish Branch**.
 
-Environ 30 secondes plus tard, le bot vous répond : **e-mail** de GitHub, ou commentaire sur votre commit.
-La suite des missions arrive de la même façon.
+Environ 30 secondes plus tard, le bot vous répond à ce commit, par **e-mail**. La suite arrive de la même façon.
+Si rien n'arrive : vérifiez vos spams et que **Email** est coché dans https://github.com/settings/notifications.
 
 ## Règles du jeu
 
